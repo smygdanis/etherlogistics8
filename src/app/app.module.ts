@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { RouterModule, Routes } from "@angular/router";
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
@@ -19,9 +18,33 @@ import {
 
 import { fuseConfig } from "app/fuse-config";
 
+// this wasn't in etherlogistics 5
+import { RouterModule, Routes } from "@angular/router";
+import { AuthGuard } from "app/main/authentication/auth.guard";
+const appRoutes: Routes = [
+    {
+        path: "",
+        redirectTo: "sample-dashboard",
+        pathMatch: "full",
+        canActivate: [AuthGuard]
+    },
+    {
+        path: "**",
+        redirectTo: "sample"
+    },
+    {
+        path: "login",
+        loadChildren: "app/main/authentication/login/login.module#LoginModule"
+    }
+];
+
+//COMPONENTS
 import { AppComponent } from "app/app.component";
 import { LayoutModule } from "app/layout/layout.module";
+
+//PAGES
 import { SampleModule } from "app/main/sample/sample.module";
+import { LoginModule } from "app/main/authentication/login/login.module";
 
 import { environment } from "../environments/environment";
 import { AngularFireModule } from "@angular/fire";
@@ -29,19 +52,13 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 
-const appRoutes: Routes = [
-    {
-        path: "**",
-        redirectTo: "sample"
-    }
-];
-
 // SERVICES
 import { AsanaService } from "app/services/asana.service";
 import { ToastrService } from "app/services/toastr.service";
 import { FirebaseService } from "app/services/firebase.service";
 import { DialogService } from "app/services/dialog.service";
 import { AuthService } from "app/services/auth.service";
+import { FleepService } from "app/services/fleep.service";
 
 //TODO: AUTH SERVICE
 //TODO: DIALOG MODAL SERVICE
@@ -77,14 +94,18 @@ import { AuthService } from "app/services/auth.service";
 
         // App modules
         LayoutModule,
-        SampleModule
+        //PAGES
+        SampleModule,
+        LoginModule
     ],
     providers: [
         AsanaService,
         ToastrService,
         FirebaseService,
         DialogService,
-        AuthService
+        AuthService,
+        FleepService,
+        AuthGuard
     ],
     bootstrap: [AppComponent]
 })
