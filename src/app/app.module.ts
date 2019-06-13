@@ -18,36 +18,6 @@ import {
 
 import { fuseConfig } from "app/fuse-config";
 
-// this wasn't in etherlogistics 5
-import { RouterModule, Routes } from "@angular/router";
-import { AuthGuard } from "app/main/authentication/auth.guard";
-const appRoutes: Routes = [
-    {
-        path: "",
-        redirectTo: "sample-dashboard",
-        pathMatch: "full",
-        canActivate: [AuthGuard]
-    },
-    {
-        path: "**",
-        redirectTo: "sample"
-    },
-    {
-        path: "company",
-        loadChildren: "app/main/pages/company/company.module#CompanyModule",
-        canActivate: [AuthGuard]
-    },
-    // {
-    //     path: "todos",
-    //     loadChildren: "app/main/apps/todo/todo.module#TodoModule",
-    //     canActivate: [AuthGuard]
-    // },
-    {
-        path: "login",
-        loadChildren: "app/main/authentication/login/login.module#LoginModule"
-    }
-];
-
 //COMPONENTS
 import { AppComponent } from "app/app.component";
 import { LayoutModule } from "app/layout/layout.module";
@@ -64,6 +34,45 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { AngularFireAuthModule } from "@angular/fire/auth";
+import {
+    AngularFireAuthGuard,
+    canActivate,
+    redirectUnauthorizedTo,
+    redirectLoggedInTo
+} from "@angular/fire/auth-guard";
+
+// this wasn't in etherlogistics 5
+import { RouterModule, Routes } from "@angular/router";
+import { AuthGuard } from "app/main/authentication/auth.guard";
+const appRoutes: Routes = [
+    {
+        path: "",
+        redirectTo: "sample-dashboard",
+        pathMatch: "full",
+        ...canActivate(redirectUnauthorizedTo(["login"]))
+        // canActivate: [AuthGuard]
+    },
+    {
+        path: "**",
+        redirectTo: "sample"
+    },
+    {
+        path: "company",
+        loadChildren: "app/main/pages/company/company.module#CompanyModule",
+        ...canActivate(redirectUnauthorizedTo(["login"]))
+        // canActivate: [AuthGuard]
+    },
+    // {
+    //     path: "todos",
+    //     loadChildren: "app/main/apps/todo/todo.module#TodoModule",
+    //     canActivate: [AuthGuard]
+    // },
+    {
+        path: "login",
+        loadChildren: "app/main/authentication/login/login.module#LoginModule",
+        ...canActivate(redirectLoggedInTo(["sample"]))
+    }
+];
 
 // SERVICES
 import { AsanaService } from "app/services/asana.service";
