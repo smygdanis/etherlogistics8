@@ -4,6 +4,7 @@ export const locale = {
         NAV: {
             APPLICATIONS: "Applications",
             DASHBOARDS: "Settings",
+
             SAMPLE: {
                 TITLE: "Dashboard",
                 BADGE: "25"

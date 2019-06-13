@@ -1,8 +1,8 @@
 export const locale = {
-    lang: 'tr',
+    lang: "tr",
     data: {
-        'SAMPLE': {
-            'HELLO': 'Merhaba Dünya!'
+        SAMPLE: {
+            HELLO: "Γεια!"
         }
     }
 };

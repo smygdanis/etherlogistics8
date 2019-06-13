@@ -15,7 +15,7 @@ export const navigation: FuseNavigation[] = [
                 icon: "dashboard",
                 url: "/sample-dashboard",
                 badge: {
-                    title: "25",
+                    title: "15",
                     translate: "NAV.SAMPLE.BADGE",
                     bg: "#F44336",
                     fg: "#FFFFFF"
