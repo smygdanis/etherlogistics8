@@ -33,6 +33,11 @@ const appRoutes: Routes = [
         redirectTo: "sample"
     },
     {
+        path: "company",
+        loadChildren: "app/main/pages/company/company.module#CompanyModule",
+        canActivate: [AuthGuard]
+    },
+    {
         path: "login",
         loadChildren: "app/main/authentication/login/login.module#LoginModule"
     }
@@ -45,7 +50,9 @@ import { LayoutModule } from "app/layout/layout.module";
 //PAGES
 import { SampleModule } from "app/main/sample/sample.module";
 import { LoginModule } from "app/main/authentication/login/login.module";
+import { CompanyModule } from "app/main/pages/company/company.module";
 
+//FIREBASE
 import { environment } from "../environments/environment";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
@@ -96,7 +103,8 @@ import { FleepService } from "app/services/fleep.service";
         LayoutModule,
         //PAGES
         SampleModule,
-        LoginModule
+        LoginModule,
+        CompanyModule
     ],
     providers: [
         AsanaService,
