@@ -8,5 +8,6 @@ export const environment = {
         projectId: "etherlogistics-3675d",
         storageBucket: "etherlogistics-3675d.appspot.com",
         messagingSenderId: "905915998291"
-    }
+    },
+    asanaToken: "Bearer 0/b939773370479bce0e2c5272e8ffd615"
 };
