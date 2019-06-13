@@ -38,6 +38,11 @@ const appRoutes: Routes = [
         canActivate: [AuthGuard]
     },
     {
+        path: "todos",
+        loadChildren: "app/main/apps/todo/todo.module#TodoModule",
+        canActivate: [AuthGuard]
+    },
+    {
         path: "login",
         loadChildren: "app/main/authentication/login/login.module#LoginModule"
     }
@@ -51,6 +56,7 @@ import { LayoutModule } from "app/layout/layout.module";
 import { SampleModule } from "app/main/sample/sample.module";
 import { LoginModule } from "app/main/authentication/login/login.module";
 import { CompanyModule } from "app/main/pages/company/company.module";
+import { TodoModule } from "app/main/apps/todo/todo.module";
 
 //FIREBASE
 import { environment } from "../environments/environment";
@@ -99,6 +105,9 @@ import { UserPreferencesService } from "app/services/user-preferences.service";
         FuseSharedModule,
         FuseSidebarModule,
         FuseThemeOptionsModule,
+
+        //APPS
+        TodoModule,
 
         // App modules
         LayoutModule,
