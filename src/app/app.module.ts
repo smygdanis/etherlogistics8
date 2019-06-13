@@ -66,6 +66,7 @@ import { FirebaseService } from "app/services/firebase.service";
 import { DialogService } from "app/services/dialog.service";
 import { AuthService } from "app/services/auth.service";
 import { FleepService } from "app/services/fleep.service";
+import { UserPreferencesService } from "app/services/user-preferences.service";
 
 //TODO: AUTH SERVICE
 //TODO: DIALOG MODAL SERVICE
@@ -113,6 +114,8 @@ import { FleepService } from "app/services/fleep.service";
         DialogService,
         AuthService,
         FleepService,
+        UserPreferencesService,
+
         AuthGuard
     ],
     bootstrap: [AppComponent]
