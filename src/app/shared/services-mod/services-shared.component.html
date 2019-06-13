@@ -1,0 +1,78 @@
+<div>
+<!-- <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field> -->
+     <!-- HEADER -->
+     <div class="mat-elevation-z8 header mat-accent-bg p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start start"
+     fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+
+
+
+    <!-- SEARCH -->
+    <div class="search-input-wrapper mt-16 ml-16 m-sm-0" fxLayout="row" fxLayoutAlign="start center">
+            <button mat-raised-button (click)="close()" style="margin-right: 10px;">Select</button>
+
+        <label for="search" class="mr-8">
+            <mat-icon>search</mat-icon>
+        </label>
+        <mat-form-field mat-no-float class="m-0" floatLabel="never">
+            <input matInput [formControl]="searchInput" id="search" placeholder="  Services
+            ">
+        </mat-form-field>
+    </div>
+    <!-- / SEARCH -->
+
+</div>
+<!-- / HEADER -->     
+<mat-table class="mat-elevation-z8" #table [dataSource]="dataSource" [@animateStagger]="{value:'50'}">
+
+    <ng-container matColumnDef="checkbox">
+        <mat-header-cell *matHeaderCellDef><mat-icon>check_box</mat-icon></mat-header-cell>
+        <mat-cell *matCellDef="let service">
+            <mat-checkbox [(ngModel)]="checkboxes[service.serviceid]" (ngModelChange)="onSelectedChange(service.serviceid, service)"
+                          (click)="$event.stopPropagation()">
+            </mat-checkbox>
+        </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell  *matCellDef="let element">      <p class="text-truncate font-weight-600">{{element.servicename}}</p></mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="type">
+      <mat-header-cell mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+      <mat-cell  *matCellDef="let element"> {{element.servicetype}} </mat-cell>
+    </ng-container>
+  
+
+    <ng-container matColumnDef="cost">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Cost</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <p class="email text-truncate">
+                <span *ngIf="element.servicecost>0">{{element.servicecost}}</span>
+                <span *ngIf="element.servicemonthcost>0" >
+                    {{element.servicemonthcost}}
+                </span>
+                <span *ngIf="element.servicepercent>0" >{{element.servicepercent}}%</span>
+            </p>
+        </mat-cell>
+    </ng-container>
+
+
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let element; columns: displayedColumns;"
+             class="service"
+             
+             [ngClass]="{'mat-accent-50-bg':checkboxes[element.serviceid]}"
+             matRipple
+             [@animate]="{value:'*',params:{y:'100%'}}">
+    </mat-row>
+
+ 
+  </mat-table>
+
+  <button class="fab_select" mat-fab color="accent" (click)="close()">                      <mat-icon>check</mat-icon>
+  </button>   
+</div>

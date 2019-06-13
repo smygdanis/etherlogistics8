@@ -1,0 +1,150 @@
+<mat-table #table [dataSource]="dataSource" [@animateStagger]="{value:'50'}">
+
+    <ng-container matColumnDef="checkbox">
+        <mat-header-cell *matHeaderCellDef>
+            <mat-icon>check_box</mat-icon>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let service">
+            <mat-checkbox [(ngModel)]="checkboxes[service.serviceid]" (ngModelChange)="onSelectedChange(service.serviceid, service)"
+                (click)="$event.stopPropagation()">
+            </mat-checkbox>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <p class="text-truncate font-weight-600">{{element.servicename}}</p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+        <mat-header-cell mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <mat-form-field floatLabel="never">
+                <input matInput placeholder="Type" [value]="element.servicetype" [(ngModel)]="element.servicetype">
+            </mat-form-field>
+            <!-- {{element.servicetype}} -->
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cost">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Cost</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <p class="email text-truncate">
+                <span *ngIf="element.servicecost>0">{{element.servicecost}}</span>
+                <span *ngIf="element.servicemonthcost>0" >
+                    {{element.servicemonthcost}}
+                </span>
+                <span *ngIf="element.servicepercent>0" >{{element.servicepercent}}%</span>
+            </p>
+        </mat-cell>
+    </ng-container>
+
+
+
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let element; columns: displayedColumns;" class="service" (click)="editservice(element)"
+        [ngClass]="{'mat-accent-50-bg':checkboxes[element.serviceid]}" matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+    </mat-row>
+</mat-table>
+
+
+<!-- <mat-table #table [dataSource]="dataSource"
+           [@animateStagger]="{value:'50'}">
+    <ng-container matColumnDef="checkbox">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let service">
+            <mat-checkbox [(ngModel)]="checkboxes[service.serviceid]" (ngModelChange)="onSelectedChange(service.serviceid)"
+                          (click)="$event.stopPropagation()">
+            </mat-checkbox>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="avatar">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let service">
+            <img class="avatar" *ngIf="service.contphoto" [alt]="service.name"
+                 [src]="service.contphoto"/>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let service">
+            <p class="text-truncate font-weight-600">{{service.contname}} {{service.contsurname}}</p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Email</mat-header-cell>
+        <mat-cell *matCellDef="let service" fxHide fxShow.gt-sm>
+            <p class="email text-truncate">
+                {{service.contmainemail}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Phone</mat-header-cell>
+        <mat-cell *matCellDef="let service" fxHide fxShow.gt-md>
+            <p class="phone text-truncate">
+                {{service.contmobile}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="jobTitle">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-lg>Job title</mat-header-cell>
+        <mat-cell *matCellDef="let service" fxHide fxShow.gt-lg>
+            <p class="job-title text-truncate">
+                {{service.contjobtitle}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="company">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-lg>Company</mat-header-cell>
+        <mat-cell *matCellDef="let service" fxHide fxShow.gt-lg>
+            <p class="company text-truncate">
+                {{service.contcompany}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="buttons">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let service">
+            <div fxFlex="row" fxLayoutAlign="end center">
+                <button mat-icon-button (click)="$event.stopPropagation();toggleStar(service.serviceid)" aria-label="Toggle star">
+                    <mat-icon class="amber-fg" *ngIf="user.starred.includes(service.serviceid)">star</mat-icon>
+                    <mat-icon class="secondary-text" *ngIf="!user.starred.includes(service.serviceid)">star_outline</mat-icon>
+                </button>
+
+                <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More"
+                        (click)="$event.stopPropagation();">
+                    <mat-icon class="secondary-text">more_vert</mat-icon>
+                </button>
+
+                <mat-menu #moreMenu="matMenu">
+                    <button mat-menu-item aria-label="remove" (click)="deleteservice(service)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Remove</span>
+                    </button>
+                </mat-menu>
+            </div>
+
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let service; columns: displayedColumns;"
+             class="service"
+             (click)="editservice(service)"
+             [ngClass]="{'mat-accent-50-bg':checkboxes[service.id]}"
+             matRipple
+             [@animate]="{value:'*',params:{y:'100%'}}">
+    </mat-row>
+</mat-table> -->

@@ -1,0 +1,345 @@
+<div id="offers" class="page-layout simple fullwidth" fxLayout="column">
+
+  <!-- HEADER -->
+  <div class="header mat-accent-bg p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start start" fxLayout.gt-xs="row"
+    fxLayoutAlign.gt-xs="space-between center">
+
+    <!-- APP TITLE -->
+    <div fxLayout="row" fxLayoutAlign="start center">
+
+      <!-- <button mat-icon-button class="sidebar-toggle mr-12" fxHide.gt-md (click)="toggleSidebar('offers-main-sidebar')">
+        <mat-icon>menu</mat-icon>
+      </button> -->
+
+      <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">account_box
+        </mat-icon>
+        <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          {{'offers.offer' | translate}}
+        </span>
+      </div>
+
+    </div>
+    <!-- / APP TITLE -->
+
+    <!-- SEARCH -->
+    <!-- <div class="search-input-wrapper mt-16 ml-8 m-sm-0" fxLayout="row" fxLayoutAlign="start center">
+          <label for="search" class="mr-8">
+              <mat-icon>search</mat-icon>
+          </label>
+          <mat-form-field mat-no-float class="m-0" floatLabel="never">
+              <input matInput [formControl]="searchInput" id="search" placeholder="  {{'offers.Search' | translate}}
+              ">
+          </mat-form-field>
+      </div> -->
+    <!-- / SEARCH -->
+
+  </div>
+  <!-- / HEADER -->
+
+  <!-- CONTENT -->
+  <div class="content p-24">
+ 
+
+
+
+
+    <div class="h1 pt-48">
+      Complete the steps
+    </div>
+
+    <p class="pb-32">
+      Guide here for offer. Help tips, definitions etc.
+    </p>
+
+    <div class="vertical-stepper-wrapper">
+
+      <!-- VERTICAL STEPPER EXAMPLE -->
+      <mat-vertical-stepper class="mat-elevation-z4" [linear]="true">
+
+        <mat-step [stepControl]="verticalStepperStep1">
+
+          <form [formGroup]="verticalStepperStep1" fxLayout="column">
+
+            <ng-template matStepLabel></ng-template>
+
+            <div fxFlex="1 0 auto" fxLayout="column">
+
+              <mat-form-field fxFlex="100" appearance="outline">
+                <input matInput placeholder="Offer Title" formControlName="offtitle" required>
+                <mat-error *ngIf="verticalStepperStep1Errors.offtitle.required">
+                  Offer Title is required!
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field fxFlex="100" appearance="outline">
+                <input matInput placeholder="Offer ID" formControlName="offid" required>
+                <mat-error *ngIf="verticalStepperStep1Errors.offid.required">
+                  Offer ID is required!
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <input formControlName="companyid" matInput placeholder="Pick  Company" value="" (keydown)="searchFirebCompanies($event)" [matAutocomplete]="autoComp">
+                <mat-autocomplete autoActiveFirstOption #autoComp="matAutocomplete"  [displayWith]="displayFnComp">
+                    <mat-option *ngFor="let option of companies | async" [value]="option" >
+                      {{option.companyname}}
+                    </mat-option>
+                  </mat-autocomplete>
+              </mat-form-field> 
+
+            </div>
+            <div class="pt-24" fxLayout="row" fxLayoutAlign="center center">
+              <button mat-raised-button matStepperNext type="button" color="accent">
+                Next
+              </button>
+            </div>
+
+          </form>
+
+        </mat-step>
+
+        <mat-step [stepControl]="verticalStepperStep2">
+
+          <form [formGroup]="verticalStepperStep2" fxLayout="column">
+
+            <ng-template matStepLabel></ng-template>
+
+            <div fxFlex="1 0 auto" fxLayout="column">
+
+              <mat-form-field fxFlex="100" appearance="outline">
+                <input matInput [matDatepicker]="picker" placeholder="Offer Date" formControlName="offdatefirst"
+                  required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="verticalStepperStep2Errors.offdatefirst.required">
+                  Offer Date is required!
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field fxFlex="100" appearance="outline">
+
+
+                <mat-select placeholder="Offer Status" required formControlName="offstatus">
+                  <mat-option *ngFor="let item of offerStatuses" [value]="item">
+                    {{item}}
+                  </mat-option>
+                </mat-select>
+
+                <mat-error *ngIf="verticalStepperStep2Errors.offstatus.required">
+                  Offer Status is required!
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+            <div class="pt-24" fxLayout="row" fxLayoutAlign="center center">
+              <button mat-raised-button matStepperNext type="button" color="accent">
+                Next
+              </button>
+            </div>
+
+          </form>
+
+        </mat-step>
+
+        <mat-step [stepControl]="verticalStepperStep3">
+
+          <form [formGroup]="verticalStepperStep3" fxLayout="column">
+
+            <ng-template matStepLabel></ng-template>
+
+            <div fxFlex="1 0 auto" fxLayout="column">
+
+              <!-- <mat-form-field fxFlex="100" appearance="outline">
+
+                <mat-select placeholder="Company" required formControlName="offcompany">
+                  <mat-option *ngFor="let item of offerStatuses" [value]="item">
+                    {{item}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="verticalStepperStep3Errors.offcompany.required">
+                  Offer Company is required!
+                </mat-error>
+              </mat-form-field> -->
+
+              <!--  <mat-form-field fxFlex="100" appearance="outline">
+
+
+               <mat-select placeholder="Contact Assigned" required formControlName="offcontact">
+                  <mat-option *ngFor="let item of offerStatuses" [value]="item">
+                    {{item}}
+                  </mat-option>
+                </mat-select>
+
+                <mat-error *ngIf="verticalStepperStep3Errors.offcontact.required">
+                  Offer Contact is required!
+                </mat-error>
+              </mat-form-field> -->
+
+    
+
+              <mat-form-field class="example-full-width">
+                <input formControlName="contid" matInput placeholder="Pick  Contact" value="" (keydown)="searchFirebContacts($event)" [matAutocomplete]="autoCont">
+                <mat-autocomplete autoActiveFirstOption #autoCont="matAutocomplete"  [displayWith]="displayFnCont">
+                    <mat-option *ngFor="let option of contacts | async" [value]="option" >
+                      {{option.contsurname}}
+                    </mat-option>
+                  </mat-autocomplete>
+              </mat-form-field> 
+
+             <mat-form-field [style.fontSize]="14">
+                <mat-label>Notes</mat-label>
+                <textarea matInput
+                          cdkTextareaAutosize
+                          #autosize="cdkTextareaAutosize"
+                          cdkAutosizeMinRows="2"
+                          cdkAutosizeMaxRows="5" formControlName="offnotes"></textarea>
+                          <mat-error *ngIf="verticalStepperStep3Errors.offnotes.required">
+                            Offer Notes are required!
+                          </mat-error>       
+              </mat-form-field>
+
+            </div>
+            <div class="pt-24" fxLayout="row" fxLayoutAlign="center center">
+              <button mat-raised-button matStepperNext type="button" color="accent">
+                Next
+              </button>
+            </div>
+
+          </form>
+
+        </mat-step>
+
+        <mat-step>
+
+          <ng-template matStepLabel>Done</ng-template>
+
+          <div class="h2 m-16" fxLayout="row" fxLayoutAlign="center center">
+            Thank your for filling out our form Continue by adding services.
+          </div>
+
+          <div class="pt-24" fxLayout="row" fxLayoutAlign="center center">
+            <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+              Previous
+            </button>
+            <button mat-raised-button type="button" color="accent" (click)="finishVerticalStepper()">
+              Finish
+            </button>
+          </div>
+
+        </mat-step>
+
+      </mat-vertical-stepper>
+      <!-- / VERTICAL STEPPER EXAMPLE -->
+
+
+
+
+ 
+
+       </div>
+       <!-- / vertical stepper -->
+
+       <!-- <div>
+          <form class="mat-white-bg mat-elevation-z4 p-24 mr-24 mb-24" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Search Value" value="" (keydown)="searchFireb($event)">
+              </mat-form-field> <br>
+         
+      
+              <div>
+                <mat-list role="list" *ngFor="let item of contacts |async">
+                  <mat-list-item (click)="showItem(item)" role="listitem">{{item.contname}}</mat-list-item>
+                  <mat-divider></mat-divider>
+      
+                </mat-list>
+              </div>
+      
+              <div *ngIf="(contacts|async)?.length <1">
+                <p>No results</p>
+              </div>
+            </form>
+       </div> -->
+
+
+       <div class="">
+          <form class="mat-white-bg mat-elevation-z4 p-24 mr-24 mb-24 w-100-p" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto">
+    
+       
+              <button mat-raised-button color="accent" (click)="pickServices()">Add Service</button>
+
+      
+             <div>
+                <mat-list role="list" *ngFor="let item of selected_services; let i = index">
+                  <mat-list-item role="listitem"><span (click)="showMore(item)" >{{item.servicename}}</span>
+
+
+        
+                      
+
+                    <span class="right">
+                        <span class="cost">{{item.servicecost*item.months}}</span>
+
+                      <span *ngIf="item.serviceonce==='month'">{{item.months}}</span>
+                      <mat-icon *ngIf="item.serviceonce==='month'" (click)="addMonth(i)">add_circle</mat-icon>
+                      <mat-icon *ngIf="item.serviceonce==='month'" (click)="minusMonth(i)">remove_circle</mat-icon>
+                      <mat-icon *ngIf="item.servicepercentage === false"  (click)="editCost(i)">edit</mat-icon>
+                      <mat-icon *ngIf="item.servicepercentage === true"(click)="editBudgetPercentage(i)">edit</mat-icon>
+                      <mat-icon [ngClass]="{hasValue: item.note!=null}" (click)="addNote(i)">note</mat-icon>
+                      <mat-icon (click)="deleteService(i, item.servicecost)">delete</mat-icon>
+
+                    </span>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+      
+                </mat-list>
+              </div>
+      
+             <!--   <div *ngIf="(contacts|async)?.length <1">
+                <p>No results</p>
+              </div> -->
+            </form>
+       </div>
+
+       <div class="sums mat-white-bg mat-elevation-z4 p-24 mr-24 mb-24 w-100-p" >
+         <mat-list role="list" class="titloi">
+          <mat-list-item role="listitem"><span class="list-title">TAX:</span></mat-list-item><mat-divider></mat-divider>
+          <mat-list-item role="listitem"><span class="list-title">Discount:</span></mat-list-item><mat-divider></mat-divider>
+          <mat-list-item role="listitem"><span class="list-title">Subtotal:</span></mat-list-item><mat-divider></mat-divider>
+          <mat-list-item role="listitem"><span class="list-title">TAX Subtotal:</span></mat-list-item><mat-divider></mat-divider>
+
+          <mat-list-item role="listitem"><span class="list-title">Total:</span></mat-list-item>
+         </mat-list>
+
+          <mat-list role="list" class="times">
+              <mat-list-item role="listitem"> {{offfpa}}</mat-list-item>  <mat-divider></mat-divider>
+
+              <mat-list-item role="listitem">   <mat-form-field >
+                  <input (change)="discount(offdiscount)" matInput [(ngModel)]="offdiscount"> </mat-form-field>
+              </mat-list-item>  <mat-divider></mat-divider>
+
+              <mat-list-item role="listitem"> {{offsubtotal}}</mat-list-item>  <mat-divider></mat-divider>
+
+              <mat-list-item role="listitem"> {{offsubttotalfpa}}</mat-list-item>  <mat-divider></mat-divider>
+
+              <mat-list-item role="listitem">{{offtotal}}</mat-list-item>
+            </mat-list>
+
+       </div>
+       <!-- sums end -->
+
+       <mat-toolbar class="testclass">
+          <!-- <span>Application Title</span> -->
+        
+          <!-- This fills the remaining space of the current row -->
+          <span flex></span>
+        
+          <button mat-fab color="accent" (click)="saveOffer()">                      <mat-icon>save</mat-icon>
+          </button>        </mat-toolbar>
+   
+
+    </div>
+    <!-- / content -->
+
+  </div>
+  <!-- / offers -->

@@ -27,6 +27,9 @@ import { SampleModule } from "app/main/sample/sample.module";
 import { LoginModule } from "app/main/authentication/login/login.module";
 import { CompanyModule } from "app/main/pages/company/company.module";
 import { TodoModule } from "app/main/apps/todo/todo.module";
+import { OffersModule } from "app/main/offers/offers.module";
+import { ServicesModModule } from "app/shared/services-mod/services-mod.module";
+import { ServicesModule } from "app/main/services/services.module";
 
 //FIREBASE
 import { environment } from "../environments/environment";
@@ -63,6 +66,25 @@ const appRoutes: Routes = [
         loadChildren: "app/main/pages/company/company.module#CompanyModule",
         ...canActivate(redirectUnauthorizedTo(["login"]))
         // canActivate: [AuthGuard]
+    },
+    {
+        path: "offers",
+        loadChildren: "./main/offers/offers.module#OffersModule",
+        ...canActivate(redirectUnauthorizedTo(["login"]))
+        // canActivate:  [AuthGuard]
+    },
+    {
+        path: "services",
+        loadChildren: "./main/services/services.module#ServicesModule",
+        ...canActivate(redirectUnauthorizedTo(["login"]))
+        // canActivate:  [AuthGuard]
+    },
+    {
+        path: "servicesShared",
+        loadChildren:
+            "./shared/services-mod/services-mod.module#ServicesModModule",
+        ...canActivate(redirectUnauthorizedTo(["login"]))
+        // canActivate:  [AuthGuard]
     },
     // {
     //     path: "todos",
@@ -126,7 +148,9 @@ import { UserPreferencesService } from "app/services/user-preferences.service";
         //PAGES
         SampleModule,
         LoginModule,
-        CompanyModule
+        CompanyModule,
+        OffersModule,
+        ServicesModModule
     ],
     providers: [
         AsanaService,

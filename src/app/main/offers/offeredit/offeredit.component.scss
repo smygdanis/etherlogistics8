@@ -1,0 +1,83 @@
+// @import '../../../../@fuse/scss/theming.scss';
+
+#offers {
+    .testclass {
+        display: flex;
+        button {
+            margin-left: auto;
+        }
+    }
+
+    .sums {
+        display: grid;
+        grid-template-columns: 95% 5%;
+    }
+
+    .titloi {
+        grid-column: 1 / 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+    .times {
+        grid-column: 2 / -1;
+    }
+
+    .sums .mat-list-item-content {
+        justify-content: flex-end;
+        padding: 0px !important;
+        .list-title {
+            // color: mat-color($accent, default);
+            margin-right: 5px;
+        }
+
+        .mat-form-field-infix {
+            width: 100% !important;
+        }
+        .mat-input-element {
+            text-align: right !important;
+        }
+    }
+
+    .vertical-stepper-wrapper {
+        max-width: 100% !important;
+    }
+
+    .content {
+        .right {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .cost {
+            margin-right: 5px;
+            // color: #039be5;
+            // color: mat-color($accent, default);
+            font-weight: 500;
+        }
+
+        .hasValue {
+            color: green;
+        }
+        // overflow: hidden;
+
+        form {
+            width: 100%;
+            // max-width: 800px !important;
+        }
+
+        .form-errors-model {
+            flex: 1;
+
+            code {
+                background: none !important;
+            }
+        }
+
+        .horizontal-stepper-wrapper,
+        .vertical-stepper-wrapper {
+            max-width: 800px;
+        }
+    }
+}
