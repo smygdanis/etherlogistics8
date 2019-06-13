@@ -7,7 +7,8 @@ export const environment = {
         databaseURL: "https://etherlogistics-3675d.firebaseio.com",
         projectId: "etherlogistics-3675d",
         storageBucket: "etherlogistics-3675d.appspot.com",
-        messagingSenderId: "905915998291"
+        messagingSenderId: "905915998291",
+        appId: "1:905915998291:web:95b63b3891230354"
     },
     asanaToken: "Bearer 0/b939773370479bce0e2c5272e8ffd615"
 };

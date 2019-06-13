@@ -1,9 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { FuseConfigService } from "@fuse/services/config.service";
 import { fuseAnimations } from "@fuse/animations";
 import { AuthService } from "./../../../services/auth.service";
+import { AngularFirePerformance } from "@angular/fire/performance";
 
 @Component({
     selector: "login",
@@ -13,6 +14,7 @@ import { AuthService } from "./../../../services/auth.service";
 })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
+    // screenTrace: any;
 
     /**
      * Constructor
@@ -21,6 +23,7 @@ export class LoginComponent implements OnInit {
      * @param {FormBuilder} _formBuilder
      */
     constructor(
+        private afp: AngularFirePerformance,
         private authService: AuthService,
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder
@@ -52,12 +55,21 @@ export class LoginComponent implements OnInit {
      * On init
      */
     ngOnInit(): void {
+        this.afp.trace("loginScreen");
+
         this.loginForm = this._formBuilder.group({
             email: ["", [Validators.required, Validators.email]],
             password: ["", Validators.required]
         });
     }
     // end of ngOnInit
+
+    ngOnDestroy(): void {
+        //Called once, before the instance is destroyed.
+        //Add 'implements OnDestroy' to the class.
+        // this.screenTrace.stop();
+    }
+    // end of ngOnDestroy
 
     onSubmit(): void {
         console.log(this.loginForm.value);
