@@ -24,52 +24,52 @@ import { TodoListComponent } from "app/main/apps/todo/todo-list/todo-list.compon
 import { TodoDetailsComponent } from "app/main/apps/todo/todo-details/todo-details.component";
 
 const routes: Routes = [
-    {
-        path: "all",
-        component: TodoComponent,
-        resolve: {
-            todo: TodoService
-        }
-    },
-    {
-        path: "all/:todoId",
-        component: TodoComponent,
-        resolve: {
-            todo: TodoService
-        }
-    },
-    {
-        path: "tag/:tagHandle",
-        component: TodoComponent,
-        resolve: {
-            todo: TodoService
-        }
-    },
-    {
-        path: "tag/:tagHandle/:todoId",
-        component: TodoComponent,
-        resolve: {
-            todo: TodoService
-        }
-    },
-    {
-        path: "filter/:filterHandle",
-        component: TodoComponent,
-        resolve: {
-            todo: TodoService
-        }
-    },
-    {
-        path: "filter/:filterHandle/:todoId",
-        component: TodoComponent,
-        resolve: {
-            todo: TodoService
-        }
-    },
-    {
-        path: "**",
-        redirectTo: "all"
-    }
+    // {
+    //     path: "all",
+    //     component: TodoComponent,
+    //     resolve: {
+    //         todo: TodoService
+    //     }
+    // },
+    // {
+    //     path: "all/:todoId",
+    //     component: TodoComponent,
+    //     resolve: {
+    //         todo: TodoService
+    //     }
+    // },
+    // {
+    //     path: "tag/:tagHandle",
+    //     component: TodoComponent,
+    //     resolve: {
+    //         todo: TodoService
+    //     }
+    // },
+    // {
+    //     path: "tag/:tagHandle/:todoId",
+    //     component: TodoComponent,
+    //     resolve: {
+    //         todo: TodoService
+    //     }
+    // },
+    // {
+    //     path: "filter/:filterHandle",
+    //     component: TodoComponent,
+    //     resolve: {
+    //         todo: TodoService
+    //     }
+    // },
+    // {
+    //     path: "filter/:filterHandle/:todoId",
+    //     component: TodoComponent,
+    //     resolve: {
+    //         todo: TodoService
+    //     }
+    // },
+    // {
+    //     path: "**",
+    //     redirectTo: "all"
+    // }
 ];
 
 @NgModule({

@@ -37,11 +37,11 @@ const appRoutes: Routes = [
         loadChildren: "app/main/pages/company/company.module#CompanyModule",
         canActivate: [AuthGuard]
     },
-    {
-        path: "todos",
-        loadChildren: "app/main/apps/todo/todo.module#TodoModule",
-        canActivate: [AuthGuard]
-    },
+    // {
+    //     path: "todos",
+    //     loadChildren: "app/main/apps/todo/todo.module#TodoModule",
+    //     canActivate: [AuthGuard]
+    // },
     {
         path: "login",
         loadChildren: "app/main/authentication/login/login.module#LoginModule"
