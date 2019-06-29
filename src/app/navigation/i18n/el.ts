@@ -18,7 +18,7 @@ export const locale = {
                 TITLE: "Εγγραφή"
             },
             PROFILE: {
-                TITLE: "Προίλ"
+                TITLE: "Προφίλ"
             },
             COMPANY: {
                 TITLE: "Η εταιρεία"
